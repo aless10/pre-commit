@@ -291,8 +291,6 @@ def _run_hooks(
     )
     retval = 0
     prior_diff = _get_diff()
-    print(f"Filenames {classifier.filenames}")
-    print(f"Staged {git.get_staged_files()}")
     for hook in hooks:
         current_retval, prior_diff = _run_single_hook(
             classifier, hook, skips, cols, prior_diff,
@@ -371,7 +369,14 @@ def run(
             environ.get('_PRE_COMMIT_SKIP_POST_CHECKOUT')
     ):
         return 0
-
+    staged_files = git.get_staged_files()
+    if (
+            args.hook_stage == 'pre-push' and staged_files
+    ):
+        logger.error(
+            f'`Staged files found: {staged_files}. Commit before pushing please'
+        )
+        return 1
     # Expose prepare_commit_message_source / commit_object_name
     # as environment variables for the hooks
     if args.prepare_commit_message_source:
