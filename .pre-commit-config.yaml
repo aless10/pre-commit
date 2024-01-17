@@ -2,9 +2,11 @@ repos:
 -   repo: local
     hooks:
     -   id: t-local
-        name: test a local hookcheck requirements files
+        name: test a local hookcheck
         language: system
         entry: python local.py
+        stages:
+            - "pre-push"
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
