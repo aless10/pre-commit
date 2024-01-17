@@ -5,7 +5,7 @@ import sys
 
 def main() -> int:
     print('Hello from local')
-    return 0
+    return 1
 
 
 if __name__ == '__main__':
