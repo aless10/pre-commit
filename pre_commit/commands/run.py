@@ -293,7 +293,8 @@ def _run_hooks(
     )
     retval = 0
     prior_diff = _get_diff()
-    print(prior_diff)
+    print(f"Filenames {classifier.filenames}")
+    print(f"Staged {git.get_staged_files()}")
     for hook in hooks:
         current_retval, prior_diff = _run_single_hook(
             classifier, hook, skips, cols, prior_diff,
