@@ -201,10 +201,11 @@ def _run_single_hook(
             )
         duration = round(time.monotonic() - time_before, 2) or 0
         diff_after = _get_diff()
-
+        print(f"DIFF {diff_after}")
         # if the hook makes changes, fail the commit
         files_modified = diff_before != diff_after
 
+        print(f"Files modified {files_modified}")
         if retcode or files_modified:
             print_color = color.RED
             status = 'Failed'
